@@ -2,6 +2,7 @@ Homoglyph Finder
 ================
 
 This is actually just a copy of [homoglyph-search](https://github.com/codebox/homoglyph) JS module with a few changes:
+
 1. ES6 `for-of` loop has been removed for a better browser support;
 2. there is a new `isMatches` function (see its usage below).
 
