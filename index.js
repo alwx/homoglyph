@@ -62,7 +62,7 @@ module.exports = (function(){
     "x": ["\u{1d431}", "\u{2a2f}", "\u{1d6a1}", "\u{292b}", "\u{ff58}", "\u{292c}", "\u{1d639}", "\u{1541}", "\u{1d5d1}", "\u{1d66d}", "\u{166e}", "\u{1d605}", "\u{1d59d}", "\u{0445}", "\u{1d465}", "\u{1d4cd}", "\u{1d499}", "\u{1d569}", "\u{157d}", "\u{1d501}", "\u{1d535}", "\u{00d7}", "\u{2179}"],
     "y": ["\u{03b3}", "\u{1d738}", "\u{1d772}", "\u{118dc}", "\u{1d536}", "\u{1d5d2}", "\u{1d466}", "\u{1d606}", "\u{1d49a}", "\u{1d4ce}", "\u{028f}", "\u{1d502}", "\u{1d6c4}", "\u{0443}", "\u{1d7ac}", "\u{04af}", "\u{1eff}", "\u{1d63a}", "\u{1d8c}", "\u{0263}", "\u{1d6a2}", "\u{ab5a}", "\u{1d59e}", "\u{10e7}", "\u{1d432}", "\u{1d66e}", "\u{1d56a}", "\u{1d6fe}", "\u{ff59}", "\u{213d}"],
     "z": ["\u{1d4cf}", "\u{1d56b}", "\u{1d5d3}", "\u{118c4}", "\u{1d467}", "\u{1d66f}", "\u{1d59f}", "\u{1d433}", "\u{1d6a3}", "\u{1d63b}", "\u{1d22}", "\u{ff5a}", "\u{1d503}", "\u{1d49b}", "\u{1d537}", "\u{1d607}"]
-};      
+};
 
     function buildSearchFunction(charMap) {
         function hasWordAtStart(symbols, word) {
@@ -95,9 +95,9 @@ module.exports = (function(){
         }
 
         function makeSymbolArray(txt){
-            var a = [], s;
-            for (s of txt) {
-                a.push(s)
+            var a = [];
+            for (i in txt) {
+                a.push(text[i])
             }
             return a;
         }
@@ -112,8 +112,14 @@ module.exports = (function(){
         };
     };
 
+    function isMatches(inputText, targetWord) {
+      var search = buildSearchFunction(CHAR_MAP);
+      return search(inputText, [targetWord]).length > 0 && inputText.length == targetWord.length;
+    };
+
     return {
         buildSearchFunction : buildSearchFunction,
-        search : buildSearchFunction(CHAR_MAP)
+        search : buildSearchFunction(CHAR_MAP),
+        isMatches : isMatches
     }
 }());
